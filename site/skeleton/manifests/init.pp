@@ -16,5 +16,4 @@ class skeleton {
     source => 'puppet:///modules/skeleton/bashrc',
   }
 
-
 }

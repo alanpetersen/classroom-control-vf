@@ -46,7 +46,7 @@ node default {
     message => "Hello World! This node's name is ${::hostname}",
   }
 
-  include skeleton
+  include memcached
   
   #file { '/etc/motd':
   #  ensure  => file,
