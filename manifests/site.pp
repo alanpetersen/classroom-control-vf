@@ -47,7 +47,8 @@ node default {
   }
 
   include memcached
-  
+  include nginx
+
   #file { '/etc/motd':
   #  ensure  => file,
   #  owner   => 'root',
