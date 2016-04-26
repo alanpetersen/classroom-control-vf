@@ -46,8 +46,6 @@ node default {
     message => "Hello World! This node's name is ${::hostname}",
   }
 
-  include users
-
   include skeleton
   
   #file { '/etc/motd':
