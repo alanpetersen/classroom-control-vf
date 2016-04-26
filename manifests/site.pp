@@ -46,6 +46,8 @@ node default {
     message => "Hello World! This node's name is ${::hostname}",
   }
 
+  include users
+
   #file { '/etc/motd':
   #  ensure  => file,
   #  owner   => 'root',
@@ -54,15 +56,15 @@ node default {
   #  content => "Hey hey, we're the MONKEYS\n",
   #}
 
-  exec { "cowsay 'Welcome to ${::fqdn}!' > /etc/motd":
-    path    => '/usr/local/bin',
-    creates => '/etc/motd',
-  }
+  #exec { "cowsay 'Welcome to ${::fqdn}!' > /etc/motd":
+  #  path    => '/usr/local/bin',
+  #  creates => '/etc/motd',
+  #}
 
-  host { 'testing.puppetlabs.vm':
-    ensure => present,
-    ip     => '127.0.0.1',
-  }
+  #host { 'testing.puppetlabs.vm':
+  #  ensure => present,
+  #  ip     => '127.0.0.1',
+  #}
 
 
 }
