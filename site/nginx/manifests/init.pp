@@ -33,13 +33,13 @@ class nginx {
   file { "${nginx_configdir}/nginx.conf":
     source  => "${source_base}/nginx.conf",
     require => Package[$pkg],
-    notify  => Service[$pkg],
+    notify  => Service[$svc],
   }
 
   file { "${nginx_configdir}/conf.d/default.conf":
     source  => "${source_base}/default.conf",
     require => Package[$pkg],
-    notify  => Service[$pkg],
+    notify  => Service[$svc],
   }
 
   # SERVICE
