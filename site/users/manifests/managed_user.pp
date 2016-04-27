@@ -5,6 +5,12 @@ define users::managed_user(
   $shell = '/bin/bash',
 ) {
 
+  if !defined(Group[$gid]) {
+    group { $gid:
+      ensure => present,
+    }
+  }
+
   user { $title:
     ensure     => present,
     gid        => $gid,
