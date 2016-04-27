@@ -6,7 +6,7 @@ class users::admins {
   users::managed_user { 'chen': }
 
   Users::Sysadmin {
-    group => 'admin',
+    gid   => 'admin',
     shell => '/bin/sh',
   }
 
