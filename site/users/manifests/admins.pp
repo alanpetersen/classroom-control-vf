@@ -13,7 +13,4 @@ class users::admins {
   users::sysadmin { 'bob': }
   users::sysadmin { 'mary': }
 
-
-
-
 }

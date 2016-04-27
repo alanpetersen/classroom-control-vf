@@ -27,11 +27,10 @@ define users::managed_user(
   }
 
   file { "${home}/.ssh":
-    ensure  => directory,
-    owner   => $title,
-    group   => $gid,
-    mode    => '0700',
-    require => File[$home],
+    ensure => directory,
+    owner  => $title,
+    group  => $gid,
+    mode   => '0700',
   }
 
 }
