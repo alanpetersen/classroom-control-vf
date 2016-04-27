@@ -1,21 +1,44 @@
 #
 class nginx {
 
-  $docroot = '/var/www'
-  $pkg = 'nginx'
+  case $::osfamily {
+    'redhat','debian': {
+      $package = 'nginx'
+      $owner   = 'root'
+      $group   = 'root'
+      $docroot = '/var/www'
+      $confdir = '/etc/nginx'
+      $logdir  = '/var/log/nginx'
+    }
+    'windows': {
+      $package = 'nginx-service'
+      $owner   = 'Administrator'
+      $group   = 'Administrators'
+      $docroot = 'c:/ProgramData/nginx/html'
+      $confdir = 'c:/ProgramData/nginx'
+      $logdir  = 'c:/ProgramData/nginx/logs'
+    }
+    default: {
+      fail("${::osfamily} is not supported by this module")
+    }
+  }
   $svc = 'nginx'
-  $nginx_configdir = '/etc/nginx'
-  $source_base = 'puppet:///modules/nginx'
+  $source_base = "puppet:///modules/${module_name}"
+  $nginx_user = $::osfamily ? {
+    'redhat'  => 'nginx',
+    'debian'  => 'www-data',
+    'windows' => 'nobody',
+  }
 
   File {
     ensure => file,
-    owner  => 'root',
-    group  => 'root',
+    owner  => $owner,
+    group  => $group,
     mode   => '0644',
   }
 
   # PACKAGE
-  package { $pkg:
+  package { $package:
     ensure => present,
   }
 
@@ -30,15 +53,17 @@ class nginx {
   }
 
   # CONFIG FILES
-  file { "${nginx_configdir}/nginx.conf":
-    source  => "${source_base}/nginx.conf",
-    require => Package[$pkg],
+  file { "${confdir}/nginx.conf":
+    #source  => "${source_base}/nginx.conf",
+    content => template('nginx/nginx.conf.erb'),
+    require => Package[$package],
     notify  => Service[$svc],
   }
 
-  file { "${nginx_configdir}/conf.d/default.conf":
-    source  => "${source_base}/default.conf",
-    require => Package[$pkg],
+  file { "${confdir}/conf.d/default.conf":
+    #source  => "${source_base}/default.conf",
+    content => template('nginx/default.conf.erb'),
+    require => Package[$package],
     notify  => Service[$svc],
   }
 
