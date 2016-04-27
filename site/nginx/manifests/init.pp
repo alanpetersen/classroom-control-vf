@@ -1,13 +1,15 @@
 #
 class nginx {
 
+  $docroot = '/var/www'
+  
   # PACKAGE
   package { 'nginx':
     ensure => present,
   }
 
   # DOCROOT
-  file { '/var/www':
+  file { $docroot:
     ensure => directory,
     owner  => 'root',
     group  => 'root',

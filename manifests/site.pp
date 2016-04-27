@@ -39,11 +39,16 @@ ini_setting { 'random ordering':
 # specified in the console for that node.
 
 node default {
+
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
   notify { 'hostmessage':
     message => "Hello World! This node's name is ${::hostname}",
+  }
+
+  notify { 'rolemessage':
+    message => "This machine's role is ${::machinerole}",
   }
 
   include memcached
