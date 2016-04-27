@@ -43,12 +43,13 @@ node default {
   # This is where you can declare classes for all nodes.
   # Example:
   #   class { 'my_class': }
-  notify { 'hostmessage':
-    message => "Hello World! This node's name is ${::hostname}",
+  if $::is_virtual {
+    $message = "HELLO VIRTUAL HOST ${::hostname}"
+  } else {
+    $message = "HELLO ${::hostname}"
   }
-
-  notify { 'rolemessage':
-    message => "This machine's role is ${::machinerole}",
+  notify { 'hostmessage':
+    message => $message,
   }
 
   include memcached
