@@ -1,41 +1,52 @@
 #
 define users::sysadmin(
-  $group = 'admin',
+  $gid   = 'admin',
   $shell = '/bin/bash',
+  $home  = "/home/${title}",
 ) {
 
-  if !defined(Group[$group]) {
-    group { $group:
+  if !defined(Group[$gid]) {
+    group { $gid:
       ensure => present,
     }
   }
 
   user { $title:
-    ensure => present,
-    gid    => $group,
-    shell  => $shell,
-    home   => "/home/${title}",
+    ensure     => present,
+    gid        => $gid,
+    shell      => $shell,
+    home       => $home,
+    managehome => true,
   }
 
-  file { "/home/${title}/scripts":
+  file { $home:
     ensure => directory,
     owner  => $title,
-    group  => $group,
+    group  => $gid,
     mode   => '0700',
   }
 
-  file { "/home/${title}/scripts/script1.sh":
+  $scripts_dir = "${home}/scripts"
+
+  file { $scripts_dir:
+    ensure => directory,
+    owner  => $title,
+    group  => $gid,
+    mode   => '0700',
+  }
+
+  file { "${scripts_dir}/script1.sh":
     ensure => file,
     owner  => $title,
-    group  => $group,
+    group  => $gid,
     mode   => '0700',
     source => 'puppet:///modules/users/script1.sh',
   }
 
-  file { "/home/${title}/scripts/script2.sh":
+  file { "${scripts_dir}/script2.sh":
     ensure => file,
     owner  => $title,
-    group  => $group,
+    group  => $gid,
     mode   => '0700',
     source => 'puppet:///modules/users/script2.sh',
   }

@@ -13,11 +13,19 @@ define users::managed_user(
     managehome => true,
   }
 
-  file { "${home}/.ssh":
+  file { $home:
     ensure => directory,
     owner  => $title,
     group  => $gid,
-    mode   => '0600',
+    mode   => '0700',
+  }
+
+  file { "${home}/.ssh":
+    ensure  => directory,
+    owner   => $title,
+    group   => $gid,
+    mode    => '0700',
+    require => File[$home],
   }
 
 }
