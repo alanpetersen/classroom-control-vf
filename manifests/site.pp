@@ -53,12 +53,10 @@ node default {
     message => $message,
   }
 
-  include memcached
-  class { 'nginx':
-    docroot => '/opt/www',
-  }
+  # include memcached
+  include nginx
 
-  include users::admins
+  # include users::admins
 
   #file { '/etc/motd':
   #  ensure  => file,
