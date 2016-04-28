@@ -5,6 +5,7 @@ class profile::wordpress {
   class { 'apache':
     docroot => '/var/wordpress'
   }
+  include apache::mod::php
 
   # MANAGE mysql
   class { '::mysql::server':
