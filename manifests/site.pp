@@ -55,7 +55,7 @@ node default {
 
   include memcached
   class { 'nginx':
-    root => '/opt/www',
+    docroot => '/opt/www',
   }
 
   include users::admins
