@@ -11,7 +11,10 @@ class profile::wordpress {
   class { '::mysql::server':
     root_password => 'strongpassword',
   }
-
+  class { 'mysql::bindings':
+    php_enable => true,
+  }
+  
   group { 'wordpress':
     ensure => present,
   }
