@@ -56,6 +56,8 @@ node default {
   # include memcached
   include nginx
 
+  include wrappers::epel
+  
   # include users::admins
 
   #file { '/etc/motd':
