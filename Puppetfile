@@ -6,3 +6,4 @@ mod 'vcsrepo',
   :git => 'https://github.com/puppetlabs/puppetlabs-vcsrepo'
 
 mod 'alanpetersen/moodle', :latest
+mod 'nanliu/staging', :latest
