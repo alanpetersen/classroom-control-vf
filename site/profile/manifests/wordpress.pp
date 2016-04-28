@@ -13,8 +13,8 @@ class profile::wordpress {
 
   # MANAGE wordpress
   class { 'wordpress':
-    install_url => 'https://wordpress.org/wordpress-3.8.tar.gz',
-    install_dir => '/var/wordpress',
+    #install_url => 'https://wordpress.org/wordpress-3.8.tar.gz',
+    #install_dir => '/var/wordpress',
     wp_owner    => 'wordpress',
     wp_group    => 'wordpress',
     db_user     => 'wordpress',
