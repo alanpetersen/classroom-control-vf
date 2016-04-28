@@ -1,2 +1,3 @@
 ---
 message: Hey there from the custom node datasource 'alanpetersen.puppetlabs.vm.yaml'
+nginx::docroot: /var/www
