@@ -14,7 +14,7 @@ class profile::wordpress {
   class { 'mysql::bindings':
     php_enable => true,
   }
-  
+
   group { 'wordpress':
     ensure => present,
   }
@@ -34,11 +34,13 @@ class profile::wordpress {
   # MANAGE wordpress
   class { 'wordpress':
     #install_url => 'https://wordpress.org/wordpress-3.8.tar.gz',
-    install_dir => '/var/wordpress',
-    wp_owner    => 'wordpress',
-    wp_group    => 'wordpress',
-    db_user     => 'wordpress',
-    db_password => 'wp_password',
+    install_dir    => '/var/wordpress',
+    wp_owner       => 'wordpress',
+    wp_group       => 'wordpress',
+    db_user        => 'wordpress',
+    db_password    => 'wp_password',
+    wp_multisite   => true,
+    wp_site_domain => 'alanpetersen.puppetlabs.vm',
   }
 
   # BEER O'CLOCK!
