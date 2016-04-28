@@ -7,6 +7,9 @@ class profile::wordpress {
   }
 
   # MANAGE mysql
+  class { '::mysql::server':
+    root_password => 'strongpassword',
+  }
 
   # MANAGE wordpress
 
