@@ -11,10 +11,26 @@ class profile::wordpress {
     root_password => 'strongpassword',
   }
 
+  group { 'wordpress':
+    ensure => present,
+  }
+
+  user { 'wordpress':
+    ensure => present,
+    gid    => 'wordpress',
+  }
+
+  file { '/var/wordpress':
+    ensure => directory,
+    owner  => 'wordpress',
+    group  => 'wordpress',
+    mode   => '0755',
+  }
+
   # MANAGE wordpress
   class { 'wordpress':
     #install_url => 'https://wordpress.org/wordpress-3.8.tar.gz',
-    #install_dir => '/var/wordpress',
+    install_dir => '/var/wordpress',
     wp_owner    => 'wordpress',
     wp_group    => 'wordpress',
     db_user     => 'wordpress',
