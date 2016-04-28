@@ -54,12 +54,12 @@ node default {
   }
 
   # include memcached
-  include nginx
+  # include nginx
 
-  include wrappers::epel
+  # include wrappers::epel
 
   include role::blog_server
-  
+
   # include users::admins
 
   #file { '/etc/motd':
