@@ -12,6 +12,13 @@ class profile::wordpress {
   }
 
   # MANAGE wordpress
+  class { 'wordpress':
+    install_dir => '/var/wordpress',
+    wp_owner    => 'wordpress',
+    wp_group    => 'wordpress',
+    db_user     => 'wordpress',
+    db_password => 'wp_password',
+  }
 
   # BEER O'CLOCK!
 
